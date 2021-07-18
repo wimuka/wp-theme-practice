@@ -21,7 +21,7 @@ get_header(); //* get header from header.php
       $today = date('Ymd'); //* php function to get today's date
       $homepageEvents = new WP_Query( //* class that WP provides (blueprint), created var contains all that info
         array(
-          'posts_per_page' => -1, //* limits to 2 posts per page
+          'posts_per_page' => 2, //* limits to 2 posts per page
           'post_type' => 'event', //* specify custom post type that we're trying to load
           'orderby' => 'meta_value',  //* sort things by the value of a piece of metadata
           'meta_key' => 'event_date', //* requred - allows to specify custom field to get metadata from
@@ -36,7 +36,7 @@ get_header(); //* get header from header.php
           )
         )
       );
-      ?>
+
       while ($homepageEvents->have_posts()) { //* look inside object(var) and call specific method
         $homepageEvents->the_post(); //* gets specific data ready for each post (each time loop repeats itself)
       ?>
