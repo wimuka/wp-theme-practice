@@ -41,5 +41,24 @@ function university_post_types()
             )
         )
     );
+
+    //Professors Post Type
+    register_post_type(
+        'professor', //* arg 1 - name of custom post type that we want to create                      
+        array(  //* arg 2 - array of diff options that describe custom post type
+            'supports' => array('title', 'editor', 'thumbnail'), //*adds custom features
+            'public' => true, //* this makes post type visible to esitors & viewers
+            'menu_icon' => 'dashicons-welcome-learn-more', //*to add custom icon
+            'show_in_rest' => true, //* Ensures that custom types use new Block Editor screen 
+            'labels' => array( //* to add custom labels 
+                'name' => 'Professors',
+                'add_new_item' => 'Add New Professor',
+                'edit_item' => 'Edit Professor',
+                'all_items' => 'All Professors',
+                'singular_name' => 'Professor'
+
+            )
+        )
+    );
 }
 add_action('init', 'university_post_types');
