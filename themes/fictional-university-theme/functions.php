@@ -1,5 +1,50 @@
 <?php
 
+
+//
+function pageBanner($args = NULL)
+{
+    //* if custom title is not available
+    if (!$args['title']) {
+        //* use default title from WP function
+        $args['title'] = get_the_title();
+    }
+
+    //* if custom subtitle is not available
+    if (!$args['subtitle']) {
+        //* use default subtitle from custom field (that we created)
+        $args['subtitle'] = get_field('page_banner_subtitle');
+    }
+
+    //* if photo argument wasn't passed
+    if (!$args['photo']) {
+        //* check if image was added to custom field
+        if (get_field('page_banner_background_image') and !is_archive() and !is_home()) {
+            $args['photo'] = get_field('page_banner_background_image')['sizes']['pageBanner'];
+        } else {
+            //* if no image passed or added to custom field - use default one
+            $args['photo'] = get_theme_file_uri('/images/ocean.jpg');
+        }
+    }
+
+?>
+    <div class="page-banner">
+        <div class="page-banner__bg-image" style="background-image: 
+                url(
+                    <?php
+                    echo $args['photo']
+                    ?>);">
+        </div>
+        <div class="page-banner__content container container--narrow">
+            <h1 class="page-banner__title"><?php echo $args['title'] ?></h1>
+            <div class="page-banner__intro">
+                <p><?php echo $args['subtitle'] ?></p>
+            </div>
+        </div>
+    </div>
+
+<?php  }
+
 //
 function university_files()
 {
